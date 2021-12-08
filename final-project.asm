@@ -84,7 +84,7 @@ euclid_recur_0:
 	ret
 
 sort:
-	;; r8: bool, r9: current position
+	;; r9: current position
 	mov r9, 1
 	jmp sort_outer_loop
 sort_outer_loop:
