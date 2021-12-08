@@ -33,18 +33,18 @@ divide_average:
 gcd_iter:
 	;; r8 has lesser value, r9 has greater
 	cmp rdi, rsi
-	cmovl r8, rdi
-	cmovl r9, rsi
+	cmovle r8, rdi
+	cmovle r9, rsi
 	cmovg r9, rdi
 	cmovg r8, rsi
 	;; Special case where rdi or rsi was 0
 	cmp r8, 0
-	je euclid_iter_0
+	jz euclid_iter_0
 	jmp euclid_iter
 euclid_iter:
 	mov rax, r9
 	cqo
-	idiv r8
+	div r8
 	cmp rdx, 0
 	je euclid_iter_end
 	mov r9, r8
@@ -60,19 +60,19 @@ euclid_iter_0:
 gcd_recur:
 	;; r8 has lesser value, r9 has greater
 	cmp rdi, rsi
-	cmovl r8, rdi
-	cmovl r9, rsi
+	cmovle r8, rdi
+	cmovle r9, rsi
 	cmovg r9, rdi
 	cmovg r8, rsi
 	cmp r8, 0
-	je euclid_recur_0
+	jz euclid_recur_0
 	jmp euclid_recur
 euclid_recur:	
 	mov rax, r9
 	cqo
-	idiv r8
+	div r8
 	cmp rdx, 0
-	je euclid_recur_end
+	jz euclid_recur_end
 	mov r9, r8
 	mov r8, rdx
 	call euclid_recur
